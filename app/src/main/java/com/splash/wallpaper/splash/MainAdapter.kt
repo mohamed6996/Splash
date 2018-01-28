@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.squareup.picasso.Picasso
+import android.support.v7.widget.StaggeredGridLayoutManager
+import com.google.android.flexbox.FlexboxLayoutManager
 
 
 /**
@@ -23,14 +25,19 @@ class MainAdapter(var photos: List<Photo>) : RecyclerView.Adapter<MainAdapter.Ma
     }
 
     override fun onBindViewHolder(holder: MainViewHolder?, position: Int) {
+      //  val layoutParams = holder?.itemView?.getLayoutParams() as StaggeredGridLayoutManager.LayoutParams
+
         var photo: Photo
         photo = photos.get(position)
-        Log.i("INFO", photo.webFormatUrl)
+      //  var imageRatio = photo.imageHeight / photo.imageWidth
+      //  holder?.photoItem?.heightRatio = imageRatio
+      //  Log.i("INFO", photo.webFormatUrl)
         if (photo.webFormatUrl.isNotEmpty()) {
             Picasso.with(holder?.itemView!!.context)
-                    .load(photo.webFormatUrl)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(holder?.photoItem);
+                    .load(photo.previewUrl)
+                    .into(holder?.photoItem)
+
+            // .placeholder(R.drawable.ic_launcher_background)
 
         }
     }
@@ -43,8 +50,14 @@ class MainAdapter(var photos: List<Photo>) : RecyclerView.Adapter<MainAdapter.Ma
     inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var photoItem: ImageView
 
+
         init {
             photoItem = itemView.findViewById(R.id.recyclerview_photo)
+//            val lp = photoItem.layoutParams
+//            if (lp is FlexboxLayoutManager.LayoutParams) {
+//                lp.flexGrow = 1f
+//            }
+          //  photoItem = itemView.findViewById<ImageView>(R.id.recyclerview_photo) as DynamicHeightImageView
         }
     }
 }

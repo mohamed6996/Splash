@@ -3,12 +3,15 @@ package com.splash.wallpaper.splash
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.android.flexbox.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,8 +49,17 @@ class MainFragment : Fragment() {
 
     fun initRecyclerView() {
 
-       // mainAdapter = MainAdapter(photos!!)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        // mainAdapter = MainAdapter(photos!!)
+          recyclerView.layoutManager = GridLayoutManager(context,2)
+
+
+        //  val layoutManager = FlexboxLayoutManager(context)
+        //  layoutManager.flexDirection = FlexDirection.COLUMN
+//        layoutManager.flexWrap = FlexWrap.WRAP
+//        layoutManager.flexDirection = FlexDirection.ROW
+//        layoutManager.alignItems = AlignItems.STRETCH
+//        recyclerView.layoutManager = layoutManager
+
         recyclerView.adapter = mainAdapter
     }
 
